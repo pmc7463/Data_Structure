@@ -75,11 +75,11 @@ void addPoly(ListHead *A, ListHead *B, ListHead *C){
 
     // 다항식 A에 남아 있는 노드 복사
     for (; pA != NULL; pA = pA -> link )
-        appendTerm(C, pA -> coef; pA -> expo);
+        appendTerm(C, pA -> coef, pA -> expo);
     
     // 다항식 B에 남아 있는 노드 복사
     for (; pB != NULL; pB = pB -> link )
-        appendTerm(C, pB -> coef; pB -> expo);
+        appendTerm(C, pB -> coef, pB -> expo);
 }
 
 // 다항식 리스트를 출력하는 연산
@@ -90,4 +90,32 @@ void printPoly(ListHead *L){
         if(p -> link != NULL)
             printf(" +");
     }
+}
+
+void  main(void){
+    ListHead *A, *B, *C;
+
+    // 공백 다항식 리스트 A, B, C 생성
+    A = createLinkedList();
+    B = createLinkedList();
+    C = createLinkedList();
+
+    appendTerm(A, 4, 3);
+    appendTerm(A, 3, 2);
+    appendTerm(A, 5, 1);
+    printf("\n A(x) =");
+    printPoly(A);
+
+    appendTerm(B, 3, 4);
+    appendTerm(B, 1, 3);
+    appendTerm(B, 2, 1);
+    appendTerm(B, 1, 0);
+    printf("\n B(x) =");
+    printPoly(A);
+
+    addPoly(A,B,C);
+    printf("\n C(x) =");
+    printPoly(C);
+    
+    getchar();
 }
