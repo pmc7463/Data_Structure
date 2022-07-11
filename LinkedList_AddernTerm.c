@@ -81,3 +81,13 @@ void addPoly(ListHead *A, ListHead *B, ListHead *C){
     for (; pB != NULL; pB = pB -> link )
         appendTerm(C, pB -> coef; pB -> expo);
 }
+
+// 다항식 리스트를 출력하는 연산
+void printPoly(ListHead *L){
+    ListNode *p = L -> head;
+    for (;  p; p = p -> link){
+        printf("%3.0fx^%d", p ->coef, p->expo);
+        if(p -> link != NULL)
+            printf(" +");
+    }
+}
