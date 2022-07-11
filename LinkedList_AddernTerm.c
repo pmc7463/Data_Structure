@@ -57,7 +57,7 @@ void addPoly(ListHead *A, ListHead *B, ListHead *C){
             sum = pA -> coef + pB -> coef;
             appendTerm(C, sum, pA -> expo);
             pA = pA -> link; 
-            pB -> link;
+            pB = pB-> link;
         }
 
         // 다항식 A의 지수가 다항식 B의 지수보다 큰 경우 A > B
@@ -111,7 +111,7 @@ void  main(void){
     appendTerm(B, 2, 1);
     appendTerm(B, 1, 0);
     printf("\n B(x) =");
-    printPoly(A);
+    printPoly(B);
 
     addPoly(A,B,C);
     printf("\n C(x) =");
