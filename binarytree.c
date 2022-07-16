@@ -17,3 +17,29 @@ treeNode *makeRootNode(char data, treeNode *leftNode, treeNode *rightNode){
     return root;
 }
 
+// 이진 트리에 대한 전위 순회 연산
+void preorder(treeNode *root){
+    if(root){
+        printf("%c", root -> data);
+        preorder(root -> left);
+        preorder(root -> right);
+    }
+}
+
+//이진 트리에 대한 중위 순회 연산
+void inorder(treeNode *root){
+    if(root){
+        inorder(root -> left);
+        printf("%c", root -> data);
+        inorder(root -> right);
+    }
+}
+
+// 이진 트리에 대한 후위 순회 연산
+void postorder(treeNode *root){
+    if(root){
+        postorder(root -> left);
+        postorder(root -> right);
+        printf("%c",root -> data);
+    }
+}
