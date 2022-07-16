@@ -1,23 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <memory.h>
 #include <malloc.h>
 
-typedef struct treeNode{        //ì—°ê²° ìžë£Œêµ¬ì¡°ë¡œ êµ¬ì„±í•˜ê¸° ìœ„í•´ íŠ¸ë¦¬ì˜ ë…¸ë“œ ì •ì˜
+typedef struct treeNode{        //¿¬°á ÀÚ·á±¸Á¶·Î ±¸¼ºÇÏ±â À§ÇØ Æ®¸®ÀÇ ³ëµå Á¤ÀÇ
     char data;
-    struct treeNode *left;      // ì™¼ìª½ ì„œë¸Œ íŠ¸ë¦¬ì— ëŒ€í•œ ë§í¬ í•„ë“œ
-    struct treeNode *right;     // ì˜¤ë¥¸ìª½ ì„œë¸Œ íŠ¸ë¦¬ì— ëŒ€í•œ ë§í¬ í•„ë“œ
+    struct treeNode *left;      // ¿ÞÂÊ ¼­ºê Æ®¸®¿¡ ´ëÇÑ ¸µÅ© ÇÊµå
+    struct treeNode *right;     // ¿À¸¥ÂÊ ¼­ºê Æ®¸®¿¡ ´ëÇÑ ¸µÅ© ÇÊµå
 } treeNode;
 
-//dataë¥¼ ë£¨íŠ¸ ë…¸ë“œë¡œ í•˜ì—¬ ì™¼ìª½ ì„œë¸Œ íŠ¸ë¦¬ì™€ ì˜¤ë¥¸ìª½ ì„œë¸Œ íŠ¸ë¦¬ë¥¼ ì—°ê²°í•˜ëŠ” ì—°ì‚°
+//data¸¦ ·çÆ® ³ëµå·Î ÇÏ¿© ¿ÞÂÊ ¼­ºê Æ®¸®¿Í ¿À¸¥ÂÊ ¼­ºê Æ®¸®¸¦ ¿¬°áÇÏ´Â ¿¬»ê
 treeNode *makeRootNode(char data, treeNode *leftNode, treeNode *rightNode){
     treeNode *root = (treeNode *)malloc(sizeof(treeNode));
     root -> data = data;
     root -> left = leftNode;
-    root -> right - rightNode;
+    root -> right = rightNode;
     return root;
 }
 
-// ì´ì§„ íŠ¸ë¦¬ì— ëŒ€í•œ ì „ìœ„ ìˆœíšŒ ì—°ì‚°
+// ÀÌÁø Æ®¸®¿¡ ´ëÇÑ ÀüÀ§ ¼øÈ¸ ¿¬»ê
 void preorder(treeNode *root){
     if(root){
         printf("%c", root -> data);
@@ -26,7 +27,7 @@ void preorder(treeNode *root){
     }
 }
 
-//ì´ì§„ íŠ¸ë¦¬ì— ëŒ€í•œ ì¤‘ìœ„ ìˆœíšŒ ì—°ì‚°
+//ÀÌÁø Æ®¸®¿¡ ´ëÇÑ ÁßÀ§ ¼øÈ¸ ¿¬»ê
 void inorder(treeNode *root){
     if(root){
         inorder(root -> left);
@@ -35,11 +36,31 @@ void inorder(treeNode *root){
     }
 }
 
-// ì´ì§„ íŠ¸ë¦¬ì— ëŒ€í•œ í›„ìœ„ ìˆœíšŒ ì—°ì‚°
+// ÀÌÁø Æ®¸®¿¡ ´ëÇÑ ÈÄÀ§ ¼øÈ¸ ¿¬»ê
 void postorder(treeNode *root){
     if(root){
         postorder(root -> left);
         postorder(root -> right);
         printf("%c",root -> data);
     }
+}
+void main(){
+    // ¼ö½Ä (A * B - C / D)¸¦ ÀÌÁø Æ®¸®·Î ¸¸µé±â
+    treeNode *n7 = makeRootNode('D',NULL,NULL);
+    treeNode *n6 = makeRootNode('C',NULL,NULL);
+    treeNode *n5 = makeRootNode('B',NULL,NULL);
+    treeNode *n4 = makeRootNode('A',NULL,NULL);
+    treeNode *n3 = makeRootNode('/', n6, n7);
+    treeNode *n2 = makeRootNode('*', n4, n5);
+    treeNode *n1 = makeRootNode('-', n2, n3);
+
+    printf("\n preorder : ");
+    preorder(n1);
+
+    printf("\n inorder : ");
+    inorder(n1);
+    printf("\n postorder : ");
+    postorder(n1);
+
+    getchar();
 }
