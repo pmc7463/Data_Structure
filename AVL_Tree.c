@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
-#define MAX(a, b) ((a > b) ? a:b)   //(a > b) ì°¸/ê±°ì§“ íŒë³„ ?, ì°¸ì´ë©´ a, ê±°ì§“ì´ë©´ b : ì‚¼í•­ì—°ì‚°ì
+#define MAX(a, b) ((a > b) ? a:b)   //(a > b) Âü/°ÅÁş ÆÇº° ?, ÂüÀÌ¸é a, °ÅÁşÀÌ¸é b : »ïÇ×¿¬»êÀÚ
 
 typedef int element;
 
@@ -12,48 +12,48 @@ typedef struct treeNode {
 }treeNode;
 
 treeNode *LL_rotate(treeNode *parent){
-    treeNode *child = parent -> left;   //ë¶€ëª¨ë…¸ë“œì˜ ì™¼ìª½ì— ì €ì¥ëœ ì£¼ì†Œë¡œ ê°€ì„œ child ë…¸ë“œë¥¼ ìƒì„±?
-    parent -> left = child -> right;    //ìì‹ ë…¸ë“œì˜ ì˜¤ë¥¸ìª½ ì£¼ì†Œë¥¼ ë¶€ëª¨ ë…¸ë“œì˜ ì™¼ìª½ì— ì €ì¥
-    child -> right = parent;            //ë¶€ëª¨ë…¸ë“œë¥¼ ìì‹ì˜ ì˜¤ë¥¸ìª½ ë…¸ë“œë¡œ ì˜®ê¸´ë‹¤,ì €ì¥
-    //ê·¸ë¦¼ìƒìœ¼ë¡œ ë ˆë²¨ì€ ìì‹ ë…¸ë“œê°€ 0 ë¶€ëª¨ë…¸ë“œê°€ 1, ë¶€ëª¨ê°€ ìì‹ ë°‘ìœ¼ë¡œ ë“¤ì–´ê°„ê±¸ë¡œ ìƒê°
+    treeNode *child = parent -> left;   //ºÎ¸ğ³ëµåÀÇ ¿ŞÂÊ¿¡ ÀúÀåµÈ ÁÖ¼Ò·Î °¡¼­ child ³ëµå¸¦ »ı¼º?
+    parent -> left = child -> right;    //ÀÚ½Ä ³ëµåÀÇ ¿À¸¥ÂÊ ÁÖ¼Ò¸¦ ºÎ¸ğ ³ëµåÀÇ ¿ŞÂÊ¿¡ ÀúÀå
+    child -> right = parent;            //ºÎ¸ğ³ëµå¸¦ ÀÚ½ÄÀÇ ¿À¸¥ÂÊ ³ëµå·Î ¿Å±ä´Ù,ÀúÀå
+    //±×¸²»óÀ¸·Î ·¹º§Àº ÀÚ½Ä ³ëµå°¡ 0 ºÎ¸ğ³ëµå°¡ 1, ºÎ¸ğ°¡ ÀÚ½Ä ¹ØÀ¸·Î µé¾î°£°É·Î »ı°¢
     return child;
 }
 
 treeNode *RR_rotate(treeNode *parent){
-    treeNode *child = parent -> right;  //ë¶€ëª¨ë…¸ë“œì˜ ì˜¤ë¥¸ìª½ì— ì €ì¥ëœ ì£¼ì†Œë¡œ ê°€ì„œ child ë…¸ë“œë¥¼ ìƒì„±
-    parent -> right = child -> left;    //ìì‹ì˜ ì™¼ìª½ì£¼ì†Œë¥¼ ë¶€ëª¨ë…¸ë“œì˜ ì˜¤ë¥¸ìª½ì— ì €ì¥
-    child -> left = parent;             //ë¶€ëª¨ë…¸ë“œë¥¼ ìì‹ë…¸ë“œì˜ ì™¼ìª½ì— ì˜®ê¹€
+    treeNode *child = parent -> right;  //ºÎ¸ğ³ëµåÀÇ ¿À¸¥ÂÊ¿¡ ÀúÀåµÈ ÁÖ¼Ò·Î °¡¼­ child ³ëµå¸¦ »ı¼º
+    parent -> right = child -> left;    //ÀÚ½ÄÀÇ ¿ŞÂÊÁÖ¼Ò¸¦ ºÎ¸ğ³ëµåÀÇ ¿À¸¥ÂÊ¿¡ ÀúÀå
+    child -> left = parent;             //ºÎ¸ğ³ëµå¸¦ ÀÚ½Ä³ëµåÀÇ ¿ŞÂÊ¿¡ ¿Å±è
     return child;
 }
 
 treeNode *LR_rotate(treeNode *parent){
-    treeNode *child = parent -> left;  //ë¶€ëª¨ë…¸ë“œì˜ ì™¼ìª½ì— ì €ì¥ëœ ì£¼ì†Œë¡œ ê°€ì„œ child ë…¸ë“œë¥¼ ìƒì„±
-    parent -> left = RR_rotate(child); //rríšŒì „ì„ ë¨¼ì €í•˜ì—¬ ë°˜í™˜ëœ ë…¸ë“œë¥¼ ë¶€ëª¨ë…¸ë“œì˜ ì™¼ìª½ì— ì €ì¥ 
-    return LL_rotate(child);           //ë§ˆì§€ë§‰ìœ¼ë¡œ llíšŒì „ í•œë‹¤. 
+    treeNode *child = parent -> left;  //ºÎ¸ğ³ëµåÀÇ ¿ŞÂÊ¿¡ ÀúÀåµÈ ÁÖ¼Ò·Î °¡¼­ child ³ëµå¸¦ »ı¼º
+    parent -> left = RR_rotate(child); //rrÈ¸ÀüÀ» ¸ÕÀúÇÏ¿© ¹İÈ¯µÈ ³ëµå¸¦ ºÎ¸ğ³ëµåÀÇ ¿ŞÂÊ¿¡ ÀúÀå 
+    return LL_rotate(child);           //¸¶Áö¸·À¸·Î llÈ¸Àü ÇÑ´Ù. 
 }
 
 treeNode *RL_rotate(treeNode *parent){
-    treeNode *child = parent -> right;  //ë¶€ëª¨ë…¸ë“œì˜ ì˜¤ë¥´ë…¹ì— ì €ì¥ëœ ì£¼ì†Œë¡œ ê°€ì„œ child ë…¸ë“œë¥¼ ìƒì„±
-    parent -> right = LL_rotate(child); //llíšŒì „ì„ ë¨¼ì €í•˜ì—¬ ë°˜í™˜ëœ ë…¸ë“œë¥¼ ë¶€ëª¨ë…¸ë“œì˜ ì™¼ìª½ì— ì €ì¥
+    treeNode *child = parent -> right;  //ºÎ¸ğ³ëµåÀÇ ¿À¸£³ì¿¡ ÀúÀåµÈ ÁÖ¼Ò·Î °¡¼­ child ³ëµå¸¦ »ı¼º
+    parent -> right = LL_rotate(child); //llÈ¸ÀüÀ» ¸ÕÀúÇÏ¿© ¹İÈ¯µÈ ³ëµå¸¦ ºÎ¸ğ³ëµåÀÇ ¿ŞÂÊ¿¡ ÀúÀå
     return RR_rotate(child);    
 }
 
-// ì„œë¸Œ íŠ¸ë¦¬ì˜ ë†’ì´ë¥¼ êµ¬í•˜ëŠ” ì—°ì‚°
+// ¼­ºê Æ®¸®ÀÇ ³ôÀÌ¸¦ ±¸ÇÏ´Â ¿¬»ê
 int getHeight(treeNode *p){
     int height = 0;
     if(p != NULL)
         height = MAX(getHeight(p -> left), getHeight(p -> right)) +1;
-    //ì™¼ìª½ì´ A,ì˜¤ë¥¸ìª½ì´ B ë‘˜ì¤‘ì— ì„ íƒí•´ì„œ +1 í•˜ê¸°
+    //¿ŞÂÊÀÌ A,¿À¸¥ÂÊÀÌ B µÑÁß¿¡ ¼±ÅÃÇØ¼­ +1 ÇÏ±â
     return height;
 }
 
-//ì„œë¸Œ íŠ¸ë¦¬ì˜ ë†’ì´ë¥¼ ì´ìš©í•´ ê· í˜•ì¸ìˆ˜ BFë¥¼ êµ¬í•˜ëŠ” ì—°ì‚°
+//¼­ºê Æ®¸®ÀÇ ³ôÀÌ¸¦ ÀÌ¿ëÇØ ±ÕÇüÀÎ¼ö BF¸¦ ±¸ÇÏ´Â ¿¬»ê
 int getBF(treeNode *p){
-    if (p != NULL) return 0;
-    return getHeight(p -> left) - getHeight(p -> right);// ì™¼ìª½ - ì˜¤ë¥¸ìª½
+    if (p == NULL) return 0;
+    return getHeight(p -> left) - getHeight(p -> right);// ¿ŞÂÊ - ¿À¸¥ÂÊ
 }
 
-//BFë¥¼ ê²€ì‚¬í•˜ì—¬ ë¶ˆê· í˜•ì´ ë°œìƒí•œ ê²½ìš°, íšŒì „ ì—°ì‚° í˜¸ì¶œ
+//BF¸¦ °Ë»çÇÏ¿© ºÒ±ÕÇüÀÌ ¹ß»ıÇÑ °æ¿ì, È¸Àü ¿¬»ê È£Ãâ
 treeNode *rebaalance(treeNode **p) {
     int BF = getBF(*p);
 
@@ -72,7 +72,7 @@ treeNode *rebaalance(treeNode **p) {
     return *p;
 }
 
-//AVL íŠ¸ë¦¬ì— ë…¸ë“œë¥¼ ì‚½ì…í•˜ëŠ” ì—°ì‚°
+//AVL Æ®¸®¿¡ ³ëµå¸¦ »ğÀÔÇÏ´Â ¿¬»ê
 treeNode *insert_AVL_Node(treeNode **root, element x) {
     if (*root == NULL){
         *root = (treeNode *)malloc(sizeof(treeNode));
@@ -89,13 +89,13 @@ treeNode *insert_AVL_Node(treeNode **root, element x) {
         *root = rebaalance(root);
     }
     else{
-        printf("\n ì´ë¯¸ ê°™ì€ í‚¤ê°€ ìˆìŠµë‹ˆë‹¤.\n");
+        printf("\n ÀÌ¹Ì °°Àº Å°°¡ ÀÖ½À´Ï´Ù.\n");
         exit(1);
     }
     return *root;
 }
 
-//ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ì— ë…¸ë“œë¥¼ ì‚½ì…í•˜ëŠ” ì—°ì‚°
+//ÀÌÁø Å½»ö Æ®¸®¿¡ ³ëµå¸¦ »ğÀÔÇÏ´Â ¿¬»ê
 treeNode* insert_BST_Node(treeNode *p, element x){
     treeNode *newNode;
     if(p == NULL){
@@ -110,12 +110,12 @@ treeNode* insert_BST_Node(treeNode *p, element x){
     else if (x > p -> key)
         p -> right = insert_BST_Node(p -> right, x);
     else
-        printf("\nì´ë¯¸ ê°™ì€ í‚¤ê°€ ìˆìŠµë‹ˆë‹¤.\n");
+        printf("\nÀÌ¹Ì °°Àº Å°°¡ ÀÖ½À´Ï´Ù.\n");
 
     return p;
 }
 
-//ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ì™€ AVL íŠ¸ë¦¬ì—ì„œ í‚¤ê°’ xë¥¼ íƒìƒ‰í•˜ëŠ” ì—°ì‚°
+//ÀÌÁø Å½»ö Æ®¸®¿Í AVL Æ®¸®¿¡¼­ Å°°ª x¸¦ Å½»öÇÏ´Â ¿¬»ê
 treeNode *searchTree(treeNode *root, element x) {
     treeNode *p;
     int count = 0;
@@ -125,18 +125,18 @@ treeNode *searchTree(treeNode *root, element x) {
         if(x < p -> key)
             p = p -> left;
         else if (x == p -> key){
-            printf("%3dë²ˆì§¸ì— íƒìƒ‰ ì„±ê³µ", count);
+            printf("%3d¹øÂ°¿¡ Å½»ö ¼º°ø", count);
             return p;
         }
         else
             p = p -> right;
     }
     count++;
-    printf("%3dë²ˆì§¸ì— íƒìƒ‰ ì‹¤íŒ¨! ì°¾ëŠ” í‚¤ê°€ ì—†ìŠµë‹ˆë‹¤.", count);
+    printf("%3d¹øÂ°¿¡ Å½»ö ½ÇÆĞ! Ã£´Â Å°°¡ ¾ø½À´Ï´Ù.", count);
     return p;
 }
 
-//ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ë¥¼ ì¤‘ìœ„ ìˆœíšŒ í•˜ë©´ì„œ ì¶œë ¥í•˜ëŠ” ì—°ì‚°
+//ÀÌÁø Å½»ö Æ®¸®¸¦ ÁßÀ§ ¼øÈ¸ ÇÏ¸é¼­ Ãâ·ÂÇÏ´Â ¿¬»ê
 void displayInorder(treeNode *root){
     if(root){
         displayInorder(root -> left);
@@ -149,7 +149,7 @@ int main(){
     treeNode *root_AVL = NULL;
     treeNode *root_BST = NULL;
 
-    root_AVL = insert_AVL_Node(&root_AVL, 50);  //AVLíŠ¸ë¦¬ ë§Œë“¤ê¸°
+    root_AVL = insert_AVL_Node(&root_AVL, 50);  //AVLÆ®¸® ¸¸µé±â
     insert_AVL_Node(&root_AVL, 60);
     insert_AVL_Node(&root_AVL, 70);
     insert_AVL_Node(&root_AVL, 90);
@@ -159,19 +159,19 @@ int main(){
     insert_AVL_Node(&root_AVL, 72);
     insert_AVL_Node(&root_AVL, 78);
 
-    printf("\n ***** AVL íŠ¸ë¦¬ ì¶œë ¥ *****\n");
+    printf("\n ***** AVL Æ®¸® Ãâ·Â *****\n");
     displayInorder(root_AVL);
 
-    printf("\n AVL íŠ¸ë¦¬ì—ì„œ 80 íƒìƒ‰ : ");
+    printf("\n AVL Æ®¸®¿¡¼­ 80 Å½»ö : ");
     searchTree(root_AVL, 80);
 
-    printf("\n AVL íŠ¸ë¦¬ì—ì„œ 90 íƒìƒ‰ : ");
+    printf("\n AVL Æ®¸®¿¡¼­ 90 Å½»ö : ");
     searchTree(root_AVL, 90);
 
-    printf("\n AVL íŠ¸ë¦¬ì—ì„œ 76 íƒìƒ‰ : ");
+    printf("\n AVL Æ®¸®¿¡¼­ 76 Å½»ö : ");
     searchTree(root_AVL, 76);
 
-    root_BST = insert_AVL_Node(&root_BST, 50);  //BST ë§Œë“¤ê¸°
+    root_BST = insert_AVL_Node(&root_BST, 50);  //BST ¸¸µé±â
     insert_BST_Node(root_BST, 60);
     insert_BST_Node(root_BST, 70);
     insert_BST_Node(root_BST, 90);
@@ -181,15 +181,15 @@ int main(){
     insert_BST_Node(root_BST, 72);
     insert_BST_Node(root_BST, 78);
 
-    printf("\n ***** BST ì¶œë ¥ *****");
+    printf("\n ***** BST Ãâ·Â *****\n");
     displayInorder(root_BST);
 
-    printf("\n BSTì—ì„œ 80 íƒìƒ‰ : ");
+    printf("\n BST¿¡¼­ 80 Å½»ö : ");
     searchTree(root_BST, 80);
 
-    printf("\n BSTì—ì„œ 90 íƒìƒ‰ : ");
+    printf("\n BST¿¡¼­ 90 Å½»ö : ");
     searchTree(root_BST, 90);
 
-    printf("\n BSTì—ì„œ 76 íƒìƒ‰ : ");
+    printf("\n BST¿¡¼­ 76 Å½»ö : ");
     searchTree(root_BST, 76);
 }
