@@ -29,13 +29,13 @@ treeNode *RR_rotate(treeNode *parent){
 treeNode *LR_rotate(treeNode *parent){
     treeNode *child = parent -> left;  //부모노드의 왼쪽에 저장된 주소로 가서 child 노드를 생성
     parent -> left = RR_rotate(child); //rr회전을 먼저하여 반환된 노드를 부모노드의 왼쪽에 저장 
-    return LL_rotate(child);           //마지막으로 ll회전 한다. 
+    return LL_rotate(parent);           //마지막으로 ll회전 한다. 
 }
 
 treeNode *RL_rotate(treeNode *parent){
     treeNode *child = parent -> right;  //부모노드의 오르녹에 저장된 주소로 가서 child 노드를 생성
     parent -> right = LL_rotate(child); //ll회전을 먼저하여 반환된 노드를 부모노드의 왼쪽에 저장
-    return RR_rotate(child);    
+    return RR_rotate(parent);    
 }
 
 // 서브 트리의 높이를 구하는 연산
